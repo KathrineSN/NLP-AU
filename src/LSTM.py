@@ -6,12 +6,13 @@ class RNN(nn.Module):
     def __init__(self, 
                 output_dim: int, 
                 embedding_layer: nn.Embedding, 
-                hidden_dim_size: int):
-        super().__init__()
+                hidden_dim_size: int): # inputs for initializing class
+        super().__init__() # calling the __init__ function of the parent class (aka. nn.Module)
 
         # maps each token to an embedding_dim vector using our word embeddings
         self.embedding = embedding_layer
-        self.embedding_size = embedding_layer.weight.shape[1]
+        self.embedding_size = embedding_layer.weight.shape[1] 
+        print(self.embedding_size) # the dim of each vector in the embedding
 
         # the LSTM takes an embedded sentence
         self.lstm = nn.LSTM(self.embedding_size, 
@@ -38,7 +39,7 @@ class RNN(nn.Module):
 
         return F.log_softmax(x, dim=1)  # dim: batch_size*batch_max_len x num_tags
 
-    @staticmethod
+    @staticmethod # a method that is not dependent on the state of the object
     def loss_fn(outputs, labels):
         """
         Custom loss function. 
