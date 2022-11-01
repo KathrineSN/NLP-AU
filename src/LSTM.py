@@ -39,7 +39,7 @@ class RNN(nn.Module):
 
         return F.log_softmax(x, dim=1)  # dim: batch_size*batch_max_len x num_tags
 
-    @staticmethod # a method that is not dependent on the state of the object
+    @staticmethod # a method that is not dependent on the state of the object this method doesn't know anything about the state of the object (the RNN)
     def loss_fn(outputs, labels):
         """
         Custom loss function. 
